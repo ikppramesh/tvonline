@@ -1,5 +1,5 @@
 import { RefreshCw, TrendingUp, Eye, Lock } from 'lucide-react';
-import { useTrendingVideos } from '../../hooks/useTrendingVideos';
+import { useTrendingVideos, hasTrendingApiKey } from '../../hooks/useTrendingVideos';
 
 function formatViews(count: string): string {
   const n = parseInt(count, 10);
@@ -14,7 +14,7 @@ const RANK_COLORS = ['#FF0000', '#FF6B00', '#FFB300', '#7CB342', '#00ACC1'];
 
 export function TrendingVideosRow() {
   const { data: videos, isLoading, isFetching, refetch, error } = useTrendingVideos();
-  const hasApiKey = !!import.meta.env.VITE_YOUTUBE_API_KEY;
+  const hasApiKey = hasTrendingApiKey;
 
   return (
     <div className="space-y-3">
