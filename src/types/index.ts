@@ -75,15 +75,6 @@ export interface YouTubeVideoDetails {
   };
 }
 
-export interface TrendingVideo {
-  id: string;
-  title: string;
-  channelTitle: string;
-  thumbnailUrl: string;
-  viewCount: string;
-  publishedAt: string;
-}
-
 export interface GoogleUser {
   name: string;
   email: string;
