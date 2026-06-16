@@ -18,7 +18,7 @@ export function Search() {
   }
 
   return (
-    <div className="h-full overflow-y-auto px-6 py-6 space-y-6 fade-in">
+    <div className="h-full overflow-y-auto px-3 py-4 md:px-6 md:py-6 space-y-4 md:space-y-6 fade-in">
       <h1 className="text-white text-2xl font-bold">Search</h1>
 
       {/* Search bar */}

@@ -8,7 +8,7 @@ const featuredChannel = LIVE_TV_CHANNELS.hindi[0];
 
 export function Home() {
   return (
-    <div className="h-full overflow-y-auto px-6 py-6 space-y-8 fade-in">
+    <div className="h-full overflow-y-auto px-3 py-4 md:px-6 md:py-6 space-y-6 md:space-y-8 fade-in">
       <HeroBanner channel={featuredChannel} />
       <LiveChannelRow />
       <FeaturedAppsRow />

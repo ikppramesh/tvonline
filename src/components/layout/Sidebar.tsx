@@ -1,3 +1,4 @@
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Home, Tv, Grid3X3, Search, Settings } from 'lucide-react';
 import { useUIStore } from '../../store/uiStore';
@@ -15,7 +16,7 @@ export function Sidebar() {
 
   return (
     <aside
-      className={`flex flex-col h-full bg-tv-surface/80 backdrop-blur-md border-r border-tv-border transition-all duration-300 z-50 flex-shrink-0 ${
+      className={`hidden md:flex flex-col h-full bg-tv-surface/80 backdrop-blur-md border-r border-tv-border transition-all duration-300 z-50 flex-shrink-0 ${
         sidebarExpanded ? 'w-48' : 'w-16'
       }`}
       onMouseEnter={() => setSidebarExpanded(true)}
@@ -64,6 +65,39 @@ export function Sidebar() {
   );
 }
 
+/** Mobile bottom navigation bar — visible only on small screens */
+export function BottomNav() {
+  return (
+    <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 flex items-center justify-around bg-tv-surface/95 backdrop-blur-md border-t border-tv-border px-2 pb-safe pt-1">
+      {NAV_ITEMS.map(({ path, label, icon: Icon, end }) => (
+        <NavLink
+          key={path}
+          to={path}
+          end={end}
+          className={({ isActive }) =>
+            `flex flex-col items-center gap-0.5 px-3 py-2 rounded-xl transition-all duration-200 min-w-[52px] ${
+              isActive ? 'text-white' : 'text-tv-text-muted'
+            }`
+          }
+        >
+          {({ isActive }) => (
+            <>
+              <div
+                className={`p-1.5 rounded-xl transition-all duration-200 ${
+                  isActive ? 'bg-tv-focus' : ''
+                }`}
+              >
+                <Icon size={20} />
+              </div>
+              <span className="text-[10px] font-medium">{label}</span>
+            </>
+          )}
+        </NavLink>
+      ))}
+    </nav>
+  );
+}
+
 function Clock({ expanded }: { expanded: boolean }) {
   const [time, setTime] = React.useState(new Date());
 
@@ -88,5 +122,3 @@ function Clock({ expanded }: { expanded: boolean }) {
     </div>
   );
 }
-
-import React from 'react';

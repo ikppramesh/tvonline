@@ -27,7 +27,7 @@ export function LiveChannelRow() {
 
       <div className="flex gap-4 overflow-x-auto pb-2" style={{ scrollbarWidth: 'none' }}>
         {FEATURED.map((channel) => (
-          <div key={channel.channelId} className="flex-shrink-0 w-52">
+          <div key={channel.channelId} className="flex-shrink-0 w-40 sm:w-52">
             <ChannelCard channel={channel} />
           </div>
         ))}

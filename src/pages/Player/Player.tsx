@@ -57,17 +57,17 @@ export function Player() {
       <div className="absolute inset-0 flex items-center justify-center select-none pointer-events-none overflow-hidden">
         <span
           className="font-black text-white"
-          style={{ fontSize: '28vw', opacity: 0.04, lineHeight: 1 }}
+          style={{ fontSize: 'clamp(8rem, 28vw, 28vw)', opacity: 0.04, lineHeight: 1 }}
         >
           {ab}
         </span>
       </div>
 
       {/* ── Top bar ─────────────────────────────── */}
-      <div className="relative z-10 flex items-center gap-4 px-6 pt-6 pb-2">
+      <div className="relative z-10 flex items-center gap-4 px-4 pt-4 pb-2 md:px-6 md:pt-6">
         <button
           onClick={() => navigate(-1)}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-white font-medium transition-all hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white/40"
+          className="flex items-center gap-2 px-3 py-2 md:px-4 md:py-2.5 rounded-xl text-white font-medium transition-all hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white/40"
           style={{
             backgroundColor: 'rgba(0,0,0,0.5)',
             border: `1px solid ${color}66`,
@@ -80,17 +80,17 @@ export function Player() {
       </div>
 
       {/* ── Main content ────────────────────────── */}
-      <div className="relative z-10 flex-1 flex flex-col items-center justify-center px-6 pb-6 gap-8">
+      <div className="relative z-10 flex-1 flex flex-col items-center justify-center px-4 pb-4 md:px-6 md:pb-6 gap-5 md:gap-8">
 
         {/* Channel badge / logo tile */}
         <div
-          className="w-28 h-28 rounded-3xl flex items-center justify-center shadow-2xl"
+          className="w-20 h-20 md:w-28 md:h-28 rounded-3xl flex items-center justify-center shadow-2xl"
           style={{
             background: `linear-gradient(135deg, ${color}ee, ${color}77)`,
             boxShadow: `0 8px 40px ${color}55, 0 0 0 1px ${color}44`,
           }}
         >
-          <span className="text-white font-black text-3xl tracking-tight select-none">
+          <span className="text-white font-black text-2xl md:text-3xl tracking-tight select-none">
             {ab}
           </span>
         </div>
@@ -108,21 +108,21 @@ export function Player() {
               </span>
             )}
           </div>
-          <h1 className="text-white text-4xl font-black tracking-tight">{channelName}</h1>
-          {tagline && <p className="text-white/55 text-base max-w-sm mx-auto">{tagline}</p>}
+          <h1 className="text-white text-2xl md:text-4xl font-black tracking-tight">{channelName}</h1>
+          {tagline && <p className="text-white/55 text-sm md:text-base max-w-sm mx-auto">{tagline}</p>}
         </div>
 
         {/* CTA */}
         <div className="flex flex-col items-center gap-3">
           <button
             onClick={handleWatchLive}
-            className="flex items-center gap-3 px-10 py-4 rounded-2xl text-white text-xl font-bold transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-white/20"
+            className="flex items-center gap-3 px-8 py-3.5 md:px-10 md:py-4 rounded-2xl text-white text-lg md:text-xl font-bold transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-white/20"
             style={{
               background: `linear-gradient(135deg, ${color}, ${color}bb)`,
               boxShadow: `0 8px 32px ${color}66`,
             }}
           >
-            <Play size={26} fill="white" />
+            <Play size={22} fill="white" />
             Watch Live
           </button>
           <p className="text-white/35 text-xs flex items-center gap-1.5">
@@ -138,7 +138,7 @@ export function Player() {
               More in {channel.category}
             </p>
             <div
-              className="flex gap-2 overflow-x-auto pb-1 justify-center"
+              className="flex gap-2 overflow-x-auto pb-1 justify-start md:justify-center"
               style={{ scrollbarWidth: 'none' }}
             >
               {LIVE_TV_CHANNELS[channel.category]

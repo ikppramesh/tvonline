@@ -18,7 +18,7 @@ export function HeroBanner({ channel }: HeroBannerProps) {
 
   if (!channel) {
     return (
-      <div className="relative w-full h-64 bg-tv-surface-2 rounded-2xl overflow-hidden flex items-end p-8 animate-pulse">
+      <div className="relative w-full h-40 md:h-64 bg-tv-surface-2 rounded-2xl overflow-hidden flex items-end p-5 md:p-8 animate-pulse">
         <div className="space-y-2">
           <div className="w-16 h-5 bg-tv-surface-3 rounded" />
           <div className="w-48 h-7 bg-tv-surface-3 rounded" />
@@ -39,7 +39,7 @@ export function HeroBanner({ channel }: HeroBannerProps) {
   }
 
   return (
-    <div className="relative w-full h-64 rounded-2xl overflow-hidden">
+    <div className="relative w-full h-40 md:h-64 rounded-2xl overflow-hidden">
       {/* Gradient background */}
       <div
         className="absolute inset-0"
@@ -58,10 +58,10 @@ export function HeroBanner({ channel }: HeroBannerProps) {
       />
 
       {/* Giant watermark */}
-      <div className="absolute inset-0 flex items-end justify-end pr-12 pb-4 select-none pointer-events-none overflow-hidden">
+      <div className="absolute inset-0 flex items-end justify-end pr-6 md:pr-12 pb-2 md:pb-4 select-none pointer-events-none overflow-hidden">
         <span
           className="font-black text-white leading-none tracking-tight"
-          style={{ fontSize: '9rem', opacity: 0.08 }}
+          style={{ fontSize: 'clamp(4rem, 18vw, 9rem)', opacity: 0.08 }}
         >
           {abbr(channel.channelName)}
         </span>
@@ -71,9 +71,9 @@ export function HeroBanner({ channel }: HeroBannerProps) {
       <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-transparent" />
 
       {/* Content */}
-      <div className="absolute inset-0 flex items-end p-8">
-        <div className="flex-1 space-y-2">
-          <div className="flex items-center gap-3">
+      <div className="absolute inset-0 flex items-end p-4 md:p-8">
+        <div className="flex-1 space-y-1 md:space-y-2">
+          <div className="flex items-center gap-2 md:gap-3">
             <LiveBadge />
             {channel.language && (
               <span
@@ -84,15 +84,15 @@ export function HeroBanner({ channel }: HeroBannerProps) {
               </span>
             )}
           </div>
-          <h2 className="text-white text-3xl font-bold leading-tight">{channel.channelName}</h2>
+          <h2 className="text-white text-xl md:text-3xl font-bold leading-tight">{channel.channelName}</h2>
           {channel.tagline && (
-            <p className="text-white/70 text-sm">{channel.tagline}</p>
+            <p className="text-white/70 text-xs md:text-sm hidden sm:block">{channel.tagline}</p>
           )}
         </div>
 
         <button
           onClick={handleWatch}
-          className="flex items-center gap-2.5 px-7 py-3.5 rounded-xl font-bold text-white transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-white/30 ml-6 flex-shrink-0"
+          className="flex items-center gap-2 px-4 py-2.5 md:px-7 md:py-3.5 rounded-xl font-bold text-white text-sm md:text-base transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-white/30 ml-3 md:ml-6 flex-shrink-0"
           style={{
             backgroundColor: 'rgba(0,0,0,0.6)',
             border: `2px solid ${channel.color}`,
@@ -100,8 +100,10 @@ export function HeroBanner({ channel }: HeroBannerProps) {
             boxShadow: `0 4px 20px ${channel.color}55`,
           }}
         >
-          <Play size={20} fill="white" />
-          Watch Live
+          <Play size={16} fill="white" className="md:hidden" />
+          <Play size={20} fill="white" className="hidden md:block" />
+          <span className="hidden sm:inline">Watch Live</span>
+          <span className="sm:hidden">Watch</span>
         </button>
       </div>
     </div>
