@@ -8,15 +8,10 @@ interface ChannelCardProps {
   onFocus?: () => void;
 }
 
-/** First-letter abbreviation used as background watermark */
 function abbr(name: string): string {
   const words = name.trim().split(/\s+/);
   if (words.length === 1) return name.slice(0, 4).toUpperCase();
-  return words
-    .slice(0, 3)
-    .map((w) => w[0])
-    .join('')
-    .toUpperCase();
+  return words.slice(0, 3).map((w) => w[0]).join('').toUpperCase();
 }
 
 export function ChannelCard({ channel, onFocus }: ChannelCardProps) {
@@ -38,109 +33,73 @@ export function ChannelCard({ channel, onFocus }: ChannelCardProps) {
     <button
       onClick={handleClick}
       onFocus={onFocus}
-      className="group relative flex flex-col w-full rounded-xl overflow-hidden border border-tv-border hover:border-tv-focus focus:border-tv-focus focus:outline-none transition-all duration-200 hover:scale-[1.04] focus:scale-[1.04] text-left"
-      style={{ boxShadow: `0 2px 16px ${channel.color}22` }}
+      className="group relative flex flex-col w-full rounded-2xl overflow-hidden focus:outline-none transition-all duration-200 hover:scale-[1.04] focus:scale-[1.04] text-left"
+      style={{
+        background: 'rgba(255,255,255,0.04)',
+        backdropFilter: 'blur(12px)',
+        WebkitBackdropFilter: 'blur(12px)',
+        border: '1px solid rgba(255,255,255,0.07)',
+        boxShadow: `0 4px 24px ${channel.color}18`,
+      }}
     >
-      {/* ── Visual area ─────────────────────────────────── */}
-      <div className="relative aspect-video w-full overflow-hidden">
-
-        {/* Gradient background */}
+      {/* Visual area */}
+      <div className="relative aspect-video w-full overflow-hidden rounded-t-2xl">
         <div
           className="absolute inset-0"
-          style={{
-            background: `linear-gradient(135deg, ${channel.color}ee 0%, ${channel.color}99 45%, #0d0f18 100%)`,
-          }}
+          style={{ background: `linear-gradient(135deg, ${channel.color}dd 0%, ${channel.color}77 50%, #05050920 100%)` }}
         />
-
-        {/* Subtle dot-grid pattern overlay */}
+        {/* Dot grid */}
         <div
-          className="absolute inset-0 opacity-[0.07]"
-          style={{
-            backgroundImage:
-              'radial-gradient(circle, #fff 1px, transparent 1px)',
-            backgroundSize: '18px 18px',
-          }}
+          className="absolute inset-0 opacity-[0.06]"
+          style={{ backgroundImage: 'radial-gradient(circle, #fff 1px, transparent 1px)', backgroundSize: '18px 18px' }}
         />
-
-        {/* Giant watermark abbreviation */}
+        {/* Watermark */}
         <div className="absolute inset-0 flex items-center justify-center overflow-hidden select-none pointer-events-none">
-          <span
-            className="font-black text-white leading-none tracking-tight"
-            style={{ fontSize: 'clamp(3rem, 8vw, 5rem)', opacity: 0.12 }}
-          >
+          <span className="font-black text-white leading-none" style={{ fontSize: 'clamp(3rem,8vw,5rem)', opacity: 0.1 }}>
             {ab}
           </span>
         </div>
-
-        {/* Channel name pill — centered */}
+        {/* Channel name */}
         <div className="absolute inset-0 flex items-center justify-center px-3">
           <span
-            className="text-white font-bold text-sm text-center leading-snug px-3 py-1.5 rounded-lg backdrop-blur-sm max-w-full truncate"
-            style={{ backgroundColor: 'rgba(0,0,0,0.45)' }}
+            className="text-white font-semibold text-sm text-center leading-snug px-3 py-1.5 rounded-xl max-w-full truncate"
+            style={{ background: 'rgba(0,0,0,0.38)', backdropFilter: 'blur(8px)' }}
           >
             {channel.channelName}
           </span>
         </div>
-
-        {/* Top-left: LIVE badge */}
-        <div className="absolute top-2 left-2">
-          <LiveBadge />
-        </div>
-
-        {/* Top-right: language tag */}
+        {/* LIVE badge */}
+        <div className="absolute top-2 left-2"><LiveBadge /></div>
+        {/* Language tag */}
         {channel.language && (
           <div className="absolute top-2 right-2">
-            <span
-              className="text-[10px] font-semibold px-1.5 py-0.5 rounded text-white"
-              style={{ backgroundColor: 'rgba(0,0,0,0.55)' }}
-            >
+            <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded-lg text-white/80"
+              style={{ background: 'rgba(0,0,0,0.45)', backdropFilter: 'blur(8px)' }}>
               {channel.language}
             </span>
           </div>
         )}
-
-        {/* Hover play button */}
+        {/* Hover play */}
         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity duration-200">
-          <div
-            className="w-13 h-13 rounded-full flex items-center justify-center border border-white/30"
-            style={{
-              width: 52,
-              height: 52,
-              backgroundColor: `${channel.color}cc`,
-              backdropFilter: 'blur(6px)',
-            }}
-          >
-            <Play size={22} fill="white" className="text-white ml-0.5" />
+          <div className="w-12 h-12 rounded-full flex items-center justify-center"
+            style={{ background: `${channel.color}cc`, backdropFilter: 'blur(8px)', border: '1px solid rgba(255,255,255,0.25)' }}>
+            <Play size={20} fill="white" className="ml-0.5" />
           </div>
         </div>
-
-        {/* Bottom gradient fade into info bar */}
-        <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-black/50 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-black/40 to-transparent" />
       </div>
 
-      {/* ── Info bar ──────────────────────────────────── */}
-      <div
-        className="px-3 py-2"
-        style={{
-          background: `linear-gradient(to right, ${channel.color}22, #1a1d27)`,
-          borderTop: `1px solid ${channel.color}44`,
-        }}
-      >
-        <p className="text-white text-xs font-semibold truncate leading-tight">
-          {channel.channelName}
-        </p>
+      {/* Info bar */}
+      <div className="px-3 py-2.5" style={{ borderTop: `1px solid ${channel.color}25` }}>
+        <p className="text-white/90 text-xs font-semibold truncate">{channel.channelName}</p>
         {channel.tagline && (
-          <p className="text-white/50 text-[10px] truncate mt-0.5 leading-tight">
-            {channel.tagline}
-          </p>
+          <p className="text-white/40 text-[10px] truncate mt-0.5">{channel.tagline}</p>
         )}
       </div>
 
       {/* Focus ring */}
-      <div
-        className="absolute inset-0 rounded-xl ring-2 opacity-0 group-focus:opacity-100 transition-opacity duration-200 pointer-events-none"
-        style={{ '--tw-ring-color': channel.color } as React.CSSProperties}
-      />
+      <div className="absolute inset-0 rounded-2xl pointer-events-none opacity-0 group-focus:opacity-100 transition-opacity duration-200"
+        style={{ boxShadow: `0 0 0 2px ${channel.color}88` }} />
     </button>
   );
 }

@@ -4,41 +4,43 @@ import { APPS } from '../../config/apps.config';
 
 export function FeaturedAppsRow() {
   const navigate = useNavigate();
-  const featuredApps = APPS.slice(0, 8);
+  const featuredApps = APPS.slice(0, 10);
 
   return (
     <div className="space-y-3">
       <div className="flex items-center justify-between">
-        <h3 className="text-white text-lg font-semibold">Apps</h3>
+        <h3 className="text-white/90 text-base font-semibold tracking-tight">Streaming Apps</h3>
         <button
           onClick={() => navigate('/apps')}
-          className="flex items-center gap-1 text-tv-text-muted text-sm hover:text-white transition-colors"
+          className="flex items-center gap-1 text-white/40 text-sm hover:text-white/70 transition-colors"
         >
-          All apps <ChevronRight size={16} />
+          All <ChevronRight size={14} />
         </button>
       </div>
 
-      <div className="flex gap-3 overflow-x-auto pb-2">
+      <div className="flex gap-4 sm:gap-5 overflow-x-auto pb-2" style={{ scrollbarWidth: 'none' }}>
         {featuredApps.map((app) => (
           <button
             key={app.id}
             onClick={() => window.open(app.launchUrl, '_blank', 'noopener,noreferrer')}
-            className="flex-shrink-0 flex flex-col items-center gap-2 p-3 rounded-xl bg-tv-surface-2 border border-tv-border hover:border-tv-focus hover:bg-tv-surface-3 focus:outline-none focus:border-tv-focus transition-all duration-200 w-20"
+            className="group flex-shrink-0 flex flex-col items-center gap-2 focus:outline-none"
           >
             <div
-              className="w-10 h-10 rounded-xl flex items-center justify-center"
-              style={{ backgroundColor: `${app.color}20` }}
+              className="w-14 h-14 rounded-2xl flex items-center justify-center relative overflow-hidden transition-all duration-200 group-hover:scale-110"
+              style={{
+                background: `linear-gradient(145deg, ${app.color}ff, ${app.color}99)`,
+                boxShadow: `0 4px 16px ${app.color}44`,
+              }}
             >
+              <div className="absolute inset-0 rounded-2xl" style={{ background: 'linear-gradient(145deg, rgba(255,255,255,0.15) 0%, transparent 55%)' }} />
               <img
                 src={app.icon}
                 alt={app.name}
-                className="w-7 h-7 object-contain"
-                onError={(e) => {
-                  e.currentTarget.style.display = 'none';
-                }}
+                className="w-7 h-7 object-contain relative z-10"
+                onError={(e) => { e.currentTarget.style.display = 'none'; }}
               />
             </div>
-            <span className="text-white text-xs font-medium text-center truncate w-full">
+            <span className="text-white/60 text-[10px] font-medium text-center group-hover:text-white/90 transition-colors truncate w-14">
               {app.name}
             </span>
           </button>

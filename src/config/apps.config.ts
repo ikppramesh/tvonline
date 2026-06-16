@@ -1,10 +1,13 @@
 import type { AppItem } from '../types';
 
+// White SVG icons from simpleicons CDN — reliable, no CORS issues
+const SI = (slug: string) => `https://cdn.simpleicons.org/${slug}/ffffff`;
+
 export const APPS: AppItem[] = [
   {
     id: 'youtube',
     name: 'YouTube',
-    icon: 'https://www.youtube.com/favicon.ico',
+    icon: SI('youtube'),
     color: '#FF0000',
     launchUrl: 'https://www.youtube.com',
     launchMode: 'tab',
@@ -13,7 +16,7 @@ export const APPS: AppItem[] = [
   {
     id: 'netflix',
     name: 'Netflix',
-    icon: 'https://assets.nflxext.com/us/ffe/siteui/common/icons/nficon2016.ico',
+    icon: SI('netflix'),
     color: '#E50914',
     launchUrl: 'https://www.netflix.com',
     launchMode: 'tab',
@@ -22,7 +25,7 @@ export const APPS: AppItem[] = [
   {
     id: 'prime',
     name: 'Prime Video',
-    icon: 'https://m.media-amazon.com/images/G/01/digital/video/acquisition/favicon/favicon.ico',
+    icon: SI('primevideo'),
     color: '#00A8E1',
     launchUrl: 'https://www.primevideo.com',
     launchMode: 'tab',
@@ -31,16 +34,25 @@ export const APPS: AppItem[] = [
   {
     id: 'disney',
     name: 'Disney+',
-    icon: 'https://static-assets.bamgrid.com/product/disneyplus/static/favicon.ico',
+    icon: SI('disneyplus'),
     color: '#0063E5',
     launchUrl: 'https://www.disneyplus.com',
     launchMode: 'tab',
     description: 'Disney & Marvel',
   },
   {
+    id: 'hotstar',
+    name: 'Hotstar',
+    icon: SI('hotstar'),
+    color: '#1F80E0',
+    launchUrl: 'https://www.hotstar.com',
+    launchMode: 'tab',
+    description: 'Sports & Shows',
+  },
+  {
     id: 'twitch',
     name: 'Twitch',
-    icon: 'https://static.twitchsvc.net/images/favicon.ico',
+    icon: SI('twitch'),
     color: '#9147FF',
     launchUrl: 'https://www.twitch.tv',
     launchMode: 'tab',
@@ -49,7 +61,7 @@ export const APPS: AppItem[] = [
   {
     id: 'spotify',
     name: 'Spotify',
-    icon: 'https://open.scdn.co/cdn/images/favicon.5cb2bd30.ico',
+    icon: SI('spotify'),
     color: '#1DB954',
     launchUrl: 'https://open.spotify.com',
     launchMode: 'tab',
@@ -58,7 +70,7 @@ export const APPS: AppItem[] = [
   {
     id: 'hulu',
     name: 'Hulu',
-    icon: 'https://www.hulu.com/favicon.ico',
+    icon: SI('hulu'),
     color: '#1CE783',
     launchUrl: 'https://www.hulu.com',
     launchMode: 'tab',
@@ -67,7 +79,7 @@ export const APPS: AppItem[] = [
   {
     id: 'hbo',
     name: 'HBO Max',
-    icon: 'https://www.max.com/favicon.ico',
+    icon: SI('hbo'),
     color: '#6B2D9A',
     launchUrl: 'https://www.max.com',
     launchMode: 'tab',
@@ -76,25 +88,16 @@ export const APPS: AppItem[] = [
   {
     id: 'apple',
     name: 'Apple TV+',
-    icon: 'https://tv.apple.com/favicon.ico',
+    icon: SI('appletv'),
     color: '#555555',
     launchUrl: 'https://tv.apple.com',
     launchMode: 'tab',
     description: 'Apple Originals',
   },
   {
-    id: 'peacock',
-    name: 'Peacock',
-    icon: 'https://www.peacocktv.com/favicon.ico',
-    color: '#F7C948',
-    launchUrl: 'https://www.peacocktv.com',
-    launchMode: 'tab',
-    description: 'NBC & More',
-  },
-  {
     id: 'paramount',
     name: 'Paramount+',
-    icon: 'https://www.paramountplus.com/favicon.ico',
+    icon: SI('paramountplus'),
     color: '#0064FF',
     launchUrl: 'https://www.paramountplus.com',
     launchMode: 'tab',
@@ -103,7 +106,7 @@ export const APPS: AppItem[] = [
   {
     id: 'crunchyroll',
     name: 'Crunchyroll',
-    icon: 'https://www.crunchyroll.com/favicon.ico',
+    icon: SI('crunchyroll'),
     color: '#F47521',
     launchUrl: 'https://www.crunchyroll.com',
     launchMode: 'tab',

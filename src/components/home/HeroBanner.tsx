@@ -18,11 +18,11 @@ export function HeroBanner({ channel }: HeroBannerProps) {
 
   if (!channel) {
     return (
-      <div className="relative w-full h-40 md:h-64 bg-tv-surface-2 rounded-2xl overflow-hidden flex items-end p-5 md:p-8 animate-pulse">
-        <div className="space-y-2">
-          <div className="w-16 h-5 bg-tv-surface-3 rounded" />
-          <div className="w-48 h-7 bg-tv-surface-3 rounded" />
-          <div className="w-64 h-4 bg-tv-surface-3 rounded" />
+      <div className="relative w-full h-40 md:h-60 rounded-3xl overflow-hidden animate-pulse"
+        style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.06)' }}>
+        <div className="absolute bottom-0 left-0 p-5 space-y-2">
+          <div className="w-16 h-4 rounded-full" style={{ background: 'rgba(255,255,255,0.08)' }} />
+          <div className="w-44 h-6 rounded-full" style={{ background: 'rgba(255,255,255,0.06)' }} />
         </div>
       </div>
     );
@@ -39,69 +39,59 @@ export function HeroBanner({ channel }: HeroBannerProps) {
   }
 
   return (
-    <div className="relative w-full h-40 md:h-64 rounded-2xl overflow-hidden">
-      {/* Gradient background */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background: `linear-gradient(135deg, ${channel.color}ff 0%, ${channel.color}aa 40%, #0d0f18 100%)`,
-        }}
-      />
-
-      {/* Dot-grid pattern */}
-      <div
-        className="absolute inset-0 opacity-[0.06]"
-        style={{
-          backgroundImage: 'radial-gradient(circle, #fff 1px, transparent 1px)',
-          backgroundSize: '24px 24px',
-        }}
-      />
-
-      {/* Giant watermark */}
-      <div className="absolute inset-0 flex items-end justify-end pr-6 md:pr-12 pb-2 md:pb-4 select-none pointer-events-none overflow-hidden">
-        <span
-          className="font-black text-white leading-none tracking-tight"
-          style={{ fontSize: 'clamp(4rem, 18vw, 9rem)', opacity: 0.08 }}
-        >
+    <div className="relative w-full h-40 md:h-60 rounded-3xl overflow-hidden">
+      {/* Gradient bg */}
+      <div className="absolute inset-0" style={{
+        background: `linear-gradient(135deg, ${channel.color}cc 0%, ${channel.color}66 45%, #05050920 100%)`,
+      }} />
+      {/* Glass overlay for depth */}
+      <div className="absolute inset-0" style={{
+        background: 'linear-gradient(to bottom, rgba(255,255,255,0.03) 0%, transparent 40%, rgba(0,0,0,0.45) 100%)',
+      }} />
+      {/* Dot grid */}
+      <div className="absolute inset-0 opacity-[0.05]"
+        style={{ backgroundImage: 'radial-gradient(circle, #fff 1px, transparent 1px)', backgroundSize: '22px 22px' }} />
+      {/* Watermark */}
+      <div className="absolute inset-0 flex items-end justify-end pr-4 md:pr-10 pb-2 select-none pointer-events-none overflow-hidden">
+        <span className="font-black text-white leading-none" style={{ fontSize: 'clamp(4rem,18vw,9rem)', opacity: 0.07 }}>
           {abbr(channel.channelName)}
         </span>
       </div>
-
-      {/* Left-to-right darkening overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-transparent" />
+      {/* Left fade */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/10 to-transparent" />
 
       {/* Content */}
-      <div className="absolute inset-0 flex items-end p-4 md:p-8">
-        <div className="flex-1 space-y-1 md:space-y-2">
-          <div className="flex items-center gap-2 md:gap-3">
+      <div className="absolute inset-0 flex items-end p-4 md:p-6">
+        <div className="flex-1 space-y-1">
+          <div className="flex items-center gap-2">
             <LiveBadge />
             {channel.language && (
-              <span
-                className="text-xs font-semibold px-2 py-0.5 rounded-full text-white"
-                style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}
-              >
+              <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full text-white/80"
+                style={{ background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.15)' }}>
                 {channel.language}
               </span>
             )}
           </div>
-          <h2 className="text-white text-xl md:text-3xl font-bold leading-tight">{channel.channelName}</h2>
+          <h2 className="text-white text-lg md:text-3xl font-bold tracking-tight leading-tight">
+            {channel.channelName}
+          </h2>
           {channel.tagline && (
-            <p className="text-white/70 text-xs md:text-sm hidden sm:block">{channel.tagline}</p>
+            <p className="text-white/55 text-xs md:text-sm hidden sm:block">{channel.tagline}</p>
           )}
         </div>
 
         <button
           onClick={handleWatch}
-          className="flex items-center gap-2 px-4 py-2.5 md:px-7 md:py-3.5 rounded-xl font-bold text-white text-sm md:text-base transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-white/30 ml-3 md:ml-6 flex-shrink-0"
+          className="flex items-center gap-2 px-4 py-2.5 md:px-6 md:py-3 rounded-2xl font-semibold text-white text-sm transition-all duration-200 hover:scale-105 focus:outline-none ml-3 flex-shrink-0"
           style={{
-            backgroundColor: 'rgba(0,0,0,0.6)',
-            border: `2px solid ${channel.color}`,
-            backdropFilter: 'blur(8px)',
-            boxShadow: `0 4px 20px ${channel.color}55`,
+            background: 'rgba(255,255,255,0.15)',
+            backdropFilter: 'blur(16px)',
+            WebkitBackdropFilter: 'blur(16px)',
+            border: '1px solid rgba(255,255,255,0.25)',
+            boxShadow: `0 4px 20px ${channel.color}44`,
           }}
         >
-          <Play size={16} fill="white" className="md:hidden" />
-          <Play size={20} fill="white" className="hidden md:block" />
+          <Play size={15} fill="white" />
           <span className="hidden sm:inline">Watch Live</span>
           <span className="sm:hidden">Watch</span>
         </button>

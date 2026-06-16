@@ -12,53 +12,42 @@ export function AppTile({ app }: AppTileProps) {
   return (
     <button
       onClick={handleClick}
-      className="group flex flex-col items-center gap-3 p-4 rounded-2xl bg-tv-surface-2 border border-tv-border hover:border-tv-focus focus:border-tv-focus focus:outline-none hover:bg-tv-surface-3 focus:bg-tv-surface-3 transition-all duration-200 hover:scale-105 focus:scale-105"
-      style={{ '--app-color': app.color } as React.CSSProperties}
+      className="group flex flex-col items-center gap-2.5 focus:outline-none"
     >
-      {/* Icon container */}
+      {/* App icon — iOS/Apple TV rounded-square style */}
       <div
-        className="w-16 h-16 rounded-2xl flex items-center justify-center overflow-hidden relative"
-        style={{ backgroundColor: `${app.color}20`, border: `1px solid ${app.color}40` }}
+        className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-2xl sm:rounded-[22px] flex items-center justify-center overflow-hidden transition-all duration-200 group-hover:scale-110 group-focus:scale-110"
+        style={{
+          background: `linear-gradient(145deg, ${app.color}ff, ${app.color}99)`,
+          boxShadow: `0 6px 24px ${app.color}50, 0 2px 8px rgba(0,0,0,0.4)`,
+        }}
       >
+        {/* Glass highlight */}
+        <div
+          className="absolute inset-0 rounded-2xl"
+          style={{ background: 'linear-gradient(145deg, rgba(255,255,255,0.18) 0%, transparent 55%)' }}
+        />
         <img
           src={app.icon}
           alt={app.name}
-          className="w-10 h-10 object-contain"
+          className="w-8 h-8 sm:w-10 sm:h-10 object-contain relative z-10"
           onError={(e) => {
-            const target = e.currentTarget;
-            target.style.display = 'none';
-            if (target.nextElementSibling) {
-              (target.nextElementSibling as HTMLElement).style.display = 'flex';
-            }
+            const t = e.currentTarget as HTMLImageElement;
+            t.style.display = 'none';
+            const fb = t.nextElementSibling as HTMLElement | null;
+            if (fb) fb.style.display = 'flex';
           }}
         />
-        <div
-          className="w-10 h-10 items-center justify-center hidden"
-          style={{ display: 'none' }}
-        >
-          <span className="text-xl font-bold text-white">{app.name[0]}</span>
+        {/* Letter fallback */}
+        <div className="absolute inset-0 items-center justify-center hidden z-10">
+          <span className="text-2xl font-black text-white">{app.name[0]}</span>
         </div>
-
-        {/* Focus glow */}
-        <div
-          className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity"
-          style={{ boxShadow: `inset 0 0 20px ${app.color}30` }}
-        />
       </div>
 
-      {/* Name + description */}
-      <div className="text-center">
-        <p className="text-white text-sm font-semibold leading-tight">{app.name}</p>
-        {app.description && (
-          <p className="text-tv-text-muted text-xs mt-0.5">{app.description}</p>
-        )}
-      </div>
-
-      {/* Bottom glow on focus */}
-      <div
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 w-8 rounded-full opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity"
-        style={{ backgroundColor: app.color }}
-      />
+      {/* Label */}
+      <p className="text-white/80 text-xs font-medium text-center leading-tight truncate w-full px-1">
+        {app.name}
+      </p>
     </button>
   );
 }
