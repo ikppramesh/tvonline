@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createHashRouter } from 'react-router-dom';
 import { RootLayout } from '../components/layout/RootLayout';
 import { Home } from '../pages/Home/Home';
 import { LiveTV } from '../pages/LiveTV/LiveTV';
@@ -7,7 +7,7 @@ import { Player } from '../pages/Player/Player';
 import { Search } from '../pages/Search/Search';
 import { Settings } from '../pages/Settings/Settings';
 
-export const router = createBrowserRouter([
+export const router = createHashRouter([
   {
     path: '/',
     element: <RootLayout />,
