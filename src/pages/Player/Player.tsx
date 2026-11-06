@@ -2,6 +2,7 @@ import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Play, ExternalLink } from 'lucide-react';
 import { LiveBadge } from '../../components/shared/LiveBadge';
 import { useKeyHandler } from '../../hooks/useKeyHandler';
+import { useChannelHealth } from '../../hooks/useChannelHealth';
 import { LIVE_TV_CHANNELS } from '../../config/liveTv.config';
 
 function abbr(name: string): string {
@@ -14,6 +15,8 @@ export function Player() {
   const { id } = useParams<{ type: string; id: string }>();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+
+  const { filterHealthy } = useChannelHealth();
 
   useKeyHandler({ onBack: () => navigate(-1) });
 
@@ -118,7 +121,7 @@ export function Player() {
               More in {channel.category}
             </p>
             <div className="flex gap-2 overflow-x-auto pb-1 justify-start md:justify-center" style={{ scrollbarWidth: 'none' }}>
-              {LIVE_TV_CHANNELS[channel.category]
+              {filterHealthy(LIVE_TV_CHANNELS[channel.category])
                 .filter((c) => c.channelId !== channel.channelId)
                 .slice(0, 7)
                 .map((c) => {

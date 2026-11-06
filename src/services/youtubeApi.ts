@@ -29,6 +29,25 @@ export async function fetchVideoDetails(
   return data.items || [];
 }
 
+// channels.list costs 1 quota unit per call and accepts 50 ids, so the whole
+// catalogue is verified in a couple of requests.
+export async function fetchExistingChannelIds(
+  channelIds: string[],
+  accessToken?: string | null
+): Promise<Set<string>> {
+  const found = new Set<string>();
+  for (let i = 0; i < channelIds.length; i += 50) {
+    const batch = channelIds.slice(i, i + 50);
+    const params = buildParams({ part: 'id', id: batch.join(','), maxResults: '50' }, accessToken);
+    const { data } = await axios.get(`${BASE_URL}/channels`, {
+      params,
+      headers: buildHeaders(accessToken),
+    });
+    for (const item of data.items || []) found.add(item.id);
+  }
+  return found;
+}
+
 export async function searchYouTube(
   query: string,
   accessToken?: string | null

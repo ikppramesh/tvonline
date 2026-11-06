@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
 import { ChannelCard } from '../livetv/ChannelCard';
+import { useChannelHealth } from '../../hooks/useChannelHealth';
 import { LIVE_TV_CHANNELS } from '../../config/liveTv.config';
 
 // Show a mix: 3 Hindi + 2 Telugu + 2 Tamil on the home screen
@@ -12,6 +13,7 @@ const FEATURED = [
 
 export function LiveChannelRow() {
   const navigate = useNavigate();
+  const { filterHealthy } = useChannelHealth();
 
   return (
     <div className="space-y-3">
@@ -26,7 +28,7 @@ export function LiveChannelRow() {
       </div>
 
       <div className="flex gap-4 overflow-x-auto pb-2" style={{ scrollbarWidth: 'none' }}>
-        {FEATURED.map((channel) => (
+        {filterHealthy(FEATURED).map((channel) => (
           <div key={channel.channelId} className="flex-shrink-0 w-40 sm:w-52">
             <ChannelCard channel={channel} />
           </div>

@@ -17,6 +17,8 @@ A Chromecast-inspired web TV OS built with React + TypeScript. Watch 80+ live In
 ## Features
 
 ### 📺 Live TV — 80+ Channels
+Channels that no longer exist on YouTube are **hidden automatically**: when a YouTube API key or Google sign-in is available, the catalogue is health-checked in one cheap batched call (1 quota unit per 50 channels, cached for 6 hours). Without a key nothing is hidden.
+
 Channels are organised into **11 regional/language tabs**:
 
 | Tab | Channels |
